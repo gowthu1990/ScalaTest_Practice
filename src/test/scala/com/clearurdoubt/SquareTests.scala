@@ -15,5 +15,6 @@ object SquareTests extends AnyFlatSpec with Matchers {
     val square = Square(5.0)
 
     assert(square.area == 25.0)
+
   }
 }
