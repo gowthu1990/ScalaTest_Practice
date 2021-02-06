@@ -1,4 +1,4 @@
-package com.clearurdoubt
+package com.clearurdoubt.practice
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
