@@ -5,12 +5,3 @@ case class CamelCaseWordMaker() {
     input.map(str => str.split(" "))
       .map(arr => arr.map(_.capitalize).mkString(" "))
 }
-
-object CamelCaseWordMaker extends App {
-  def capitalize(input: List[String]): List[String] =
-    input
-      .map(str => str.split(" "))
-      .map(arr => arr.map(_.capitalize).mkString(" "))
-
-  println(capitalize(List("hello", "world", "hello world")))
-}
