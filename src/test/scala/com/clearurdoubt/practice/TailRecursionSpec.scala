@@ -22,6 +22,6 @@ class TailRecursionSpec extends AnyFlatSpec with Matchers {
     tr.factorial(0) shouldBe 1
 
     // 5 factorial
-    tr.factorial shouldBe 120
+    tr.factorial(5) shouldBe 120
   }
 }
