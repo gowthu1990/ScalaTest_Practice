@@ -3,6 +3,7 @@ package com.clearurdoubt.practice
 import scala.annotation.tailrec
 
 class TailRecursion {
+
   def concat(delimiter: String, params: String*): String = {
     @tailrec
     def concat(acc: String, params: String*): String = {
@@ -11,7 +12,7 @@ class TailRecursion {
       else concat(acc + params.head + delimiter, params.tail: _*)
     }
 
-    concat(acc = ":", params: _*)
+    concat("", params: _*)
   }
 
   def factorial(n: Int): Long = {
