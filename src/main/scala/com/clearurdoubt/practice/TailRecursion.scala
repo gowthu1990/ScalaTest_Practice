@@ -22,6 +22,14 @@ class TailRecursion {
       else factorial(n-1, acc * n)
     }
 
+    // factorial(5, 1)
+    // factorial(4, 1 * 5)
+    // factorial(3, 1 * 5 * 4)
+    // factorial(2, 1 * 5 * 4 * 3)
+    // factorial(1, 1 * 5 * 4 * 2)
+    // factorial(0, 1 * 5 * 4 * 2 * 1) => 120
+
+    // n * n - 1 * n - 2 .... * n - n
     factorial(n, acc=1)
   }
 }
