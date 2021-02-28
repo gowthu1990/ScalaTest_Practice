@@ -19,4 +19,14 @@ def factorial(n: Int): BigInt =
   else
     n * factorial(n - 1)
 
-val fact = factorial(500000)
+val fact = factorial(5000)
+
+val languages = Seq("Scala", "Haskell", "Java")
+
+// Partial Functions
+val default: PartialFunction[Int, String] = {
+    case _ => "Is it a programming Language?"
+}
+
+val languagesWithDefault = languages orElse default
+println(languages(4) orElse default)
