@@ -3,6 +3,8 @@ package com.clearurdoubt.practice.impl.list
 import scala.annotation.tailrec
 
 trait MyList[+A] {
+  def head: A
+  def tail: MyList[A]
   def isEmpty: Boolean
 
   def +[B >: A](elem: B): MyList[B]
@@ -15,6 +17,10 @@ trait MyList[+A] {
 }
 
 object EmptyList extends MyList[Nothing] {
+
+  def head: Nothing = throw new NoSuchElementException
+  def tail: MyList[Nothing] = throw new NoSuchElementException
+
   override def isEmpty: Boolean = true
 
   override def +[B >: Nothing](elem: B): MyList[B] = new NonEmptyList(elem, EmptyList)
@@ -29,7 +35,7 @@ object EmptyList extends MyList[Nothing] {
 
   override def foreach(func: Nothing => Unit): Unit = ()
 
-//  override def toString: String = "MyList()"
+  override def toString: String = "MyList()"
 }
 
 class NonEmptyList[A](h: A, t: MyList[A]) extends MyList[A] {
@@ -39,7 +45,7 @@ class NonEmptyList[A](h: A, t: MyList[A]) extends MyList[A] {
 
   override def isEmpty: Boolean = false
 
-  override def +[B >: A](elem: B): MyList[B] = new NonEmptyList[B](h = elem, EmptyList)
+  override def +[B >: A](elem: B): MyList[B] = new NonEmptyList[B](h = elem, this)
 
   override def ++[B >: A](another: MyList[B]): MyList[B] = new NonEmptyList[B](h, this ++ another)
 
@@ -58,17 +64,18 @@ class NonEmptyList[A](h: A, t: MyList[A]) extends MyList[A] {
     t foreach func
     func(h)
   }
+  override def toString: String = {
+    @tailrec
+    def elementsAsAString(myList: MyList[A], acc: String): String =
+      if(myList.isEmpty) acc
+      else
+        elementsAsAString(myList.tail,
+          if(acc.isEmpty) myList.head.toString
+          else myList.head + ", " + acc
+        )
 
-//  override def toString: String = {
-//
-//    @tailrec
-//    def getElemsAsAString(myList: NonEmptyList[A], acc: String): String =
-//      if(t.isEmpty) acc
-//      else if(t.tail.isEmpty) acc + ", " + myList.head
-//      else getElemsAsAString(myList.tail, acc + ", " + myList.head)
-//
-//    "MyList(" + elementsAsAString(this, "") + ")"
-//  }
+    "MyList(" + elementsAsAString(this, "") + ")"
+  }
 }
 
 object MyList {

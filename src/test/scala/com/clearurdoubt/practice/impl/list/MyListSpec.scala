@@ -21,6 +21,6 @@ class MyListSpec extends AnyFlatSpec with Matchers {
   it should "return another NonEmptyList by adding the given element to the given NonEmptyList" in {
     val myList = MyList(1, 2, 3)
 
-    (myList + 4) shouldBe MyList(4, 1, 2, 3)
+    (myList + 4) shouldEqual MyList(1, 2, 3, 4)
   }
 }
